@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  #newBooks {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px;
+  }
+
+  #books-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    width: 170px;
+    margin-bottom: 15px;
+  }
+
+  #add {
+    width: 50px;
+  }
+
+  .remove {
+    width: 70px;
+    margin-bottom: 10px;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  hr {
+    margin-bottom: 10px;
+  }
