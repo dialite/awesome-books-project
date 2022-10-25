@@ -21,6 +21,7 @@ class Actions {
 
       newRow.innerHTML = `
       <td>${book.title}</td>
+      <p>${'by'}</p>
       <td>${book.author}</td>
       <button class="remove">Remove</button>
       `;
