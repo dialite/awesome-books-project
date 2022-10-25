@@ -4,12 +4,7 @@
   box-sizing: border-box;
 }
 
-#newBooks {
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0;
-}
-
+.newBook,
 #books-form {
   display: flex;
   flex-direction: column;
@@ -28,16 +23,20 @@ input {
 .remove {
   width: 70px;
   margin-bottom: 10px;
+  float: right;
+  margin-right: 15px;
+  margin-top: 10px;
 }
 
 table {
   border: 1px solid black;
   border-collapse: collapse;
-  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-tr {
-  display: flex;
+tr:nth-child(odd) {
+  background-color: #e4e4e4;
 }
 
 hr {
