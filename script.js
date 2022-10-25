@@ -7,6 +7,12 @@ class Book {
 }
 
 class Actions {
+  static display() {
+    const books = Data.getLocalStorage();
+
+    books.forEach((book) => Actions.addBook(book));
+
+  }
 
   static addBook(book) {
     if (book.title !== undefined) {
@@ -21,13 +27,6 @@ class Actions {
 
       list.appendChild(newRow);
     }
-  }
-
-  static display() {
-    const books = Data.getLocalStorage();
-
-    books.forEach((book) => addBook(book));
-
   }
 
   static removeBook(element) {
@@ -54,14 +53,14 @@ class Data {
   }
 
   static setLocalStorage(book) {
-    const allBooks = getLocalStorage();
+    const allBooks = Data.getLocalStorage();
     allBooks.push(book);
     localStorage.setItem('allBooks', JSON.stringify(allBooks));
   }
 
 
   static removeLocalStorage(author) {
-    const allBooks = getLocalStorage();
+    const allBooks = Data.getLocalStorage();
 
     allBooks.forEach((book, index) => {
       if (book.author === author) {
