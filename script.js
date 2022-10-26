@@ -70,12 +70,8 @@ class Actions {
     document.querySelector('#author').value = '';
   }
 }
-
 const date = new Date();
-const currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-const currentTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-const dateTime = currentDate + ' ' + currentTime;
-document.getElementById('date').innerHTML = dateTime;
+document.getElementById('date').innerHTML = date;
 
 document.addEventListener('DOMContentLoaded', Actions.display);
 
@@ -99,8 +95,6 @@ const addNew = document.getElementById('books');
 const list = document.getElementById('newBooks');
 const title = document.getElementById('titleSection');
 const contact = document.getElementById('contactSection');
-const nav = document.getElementById('nav');
-const links = nav.getElementsByClassName('link');
 
 document.querySelector('#addNew').addEventListener('click', () => {
   addNew.classList = 'active';
@@ -122,11 +116,3 @@ document.querySelector('#contact').addEventListener('click', () => {
   title.classList = 'active';
   contact.classList = ('active');
 });
-
-for (let i = 0; i < links.length; i += 1) {
-  links[i].addEventListener('click', function () {
-    var current = document.getElementsByClassName('active');
-    current[0].className = current[0].className.replace(' active', '');
-    this.className += ' active';
-  });
-}
