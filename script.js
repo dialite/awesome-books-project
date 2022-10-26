@@ -20,9 +20,9 @@ class Actions {
       const newRow = document.createElement('tr');
 
       newRow.innerHTML = `
-      <td>${book.title}</td>
-      <td>${'by'}</td>
-      <td>${book.author}</td>
+      <li>"${book.title}"</li>
+      <li>${'by'}</li>
+      <li>${book.author}</li>
       <button class="remove">Remove</button>
       `;
 

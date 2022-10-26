@@ -2,6 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.titleSection h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .newBook,
@@ -11,34 +17,59 @@
   align-items: center;
 }
 
+.newBook h1 {
+  margin-bottom: 10px;
+}
+
 input {
-  width: 170px;
+  width: 180px;
   margin-bottom: 15px;
 }
 
 #add {
   width: 50px;
+  box-shadow: 3px 3px black;
 }
 
 .remove {
   width: 70px;
-  margin-bottom: 10px;
   float: right;
-  margin-right: 15px;
-  margin-top: 10px;
+  margin-right: 2%;
+  position: absolute;
+  right: 0;
+  box-shadow: 3px 3px black;
 }
 
 table {
   border: 1px solid black;
   border-collapse: collapse;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+tr {
+  display: flex;
+  gap: 10px;
+  padding: 7px 10px;
 }
 
 tr:nth-child(odd) {
   background-color: #e4e4e4;
 }
 
+li {
+  list-style: none;
+}
+
 hr {
   margin-bottom: 10px;
+}
+
+.bookHr {
+  box-sizing: border-box;
+  border: 1px solid #0d151e;
+  width: 100px;
+  height: 2px;
+  border-radius: 10px;
+  margin: 10px;
 }
