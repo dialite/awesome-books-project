@@ -71,6 +71,12 @@ class Actions {
   }
 }
 
+const date = new Date();
+const currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+const currentTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+const dateTime = currentDate + ' ' + currentTime;
+document.getElementById('date').innerHTML = dateTime;
+
 document.addEventListener('DOMContentLoaded', Actions.display);
 
 document.querySelector('#add').addEventListener('click', (e) => {
@@ -88,3 +94,39 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
   Actions.removeBook(e.target);
   Data.removeLocalStorage(e.target.previousElementSibling.textContent);
 });
+
+const addNew = document.getElementById('books');
+const list = document.getElementById('newBooks');
+const title = document.getElementById('titleSection');
+const contact = document.getElementById('contactSection');
+const nav = document.getElementById('nav');
+const links = nav.getElementsByClassName('link');
+
+document.querySelector('#addNew').addEventListener('click', () => {
+  addNew.classList = 'active';
+  list.classList = 'active';
+  title.classList = 'active';
+  contact.classList.remove('active');
+});
+
+document.querySelector('#list').addEventListener('click', () => {
+  addNew.classList.remove('active');
+  list.classList.remove('active');
+  title.classList.remove('active');
+  contact.classList.remove('active');
+});
+
+document.querySelector('#contact').addEventListener('click', () => {
+  addNew.classList.remove('active');
+  list.classList = 'active';
+  title.classList = 'active';
+  contact.classList = ('active');
+});
+
+for (let i = 0; i < links.length; i += 1) {
+  links[i].addEventListener('click', function () {
+    var current = document.getElementsByClassName('active');
+    current[0].className = current[0].className.replace(' active', '');
+    this.className += ' active';
+  });
+}
