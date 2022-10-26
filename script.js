@@ -1,75 +1,77 @@
 /* book template structure */
-function Book(title, author) {
-  this.title = title;
-  this.author = author;
-}
-
-/* function to create a book */
-function addBook(book) {
-  if (book.title !== undefined) {
-    const list = document.querySelector('#book-list');
-    const newRow = document.createElement('tr');
-
-    newRow.innerHTML = `
-    <td>${book.title}</td>
-    <td>${book.author}</td>
-    <button class="remove">Remove</button>
-    <hr>
-    `;
-
-    list.appendChild(newRow);
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
   }
 }
 
-/* function to remove a book */
-function removeBook(element) {
-  if (element.classList.contains('remove')) {
-    element.parentElement.remove();
-  }
-}
-
-function clearValues() {
-  document.querySelector('#title').value = '';
-  document.querySelector('#author').value = '';
-}
-
-/* function to get the data from local storage */
-function getLocalStorage() {
-  let allBooks;
-  if (localStorage.getItem('allBooks') === null) {
-    allBooks = [];
-  } else {
-    allBooks = JSON.parse(localStorage.getItem('allBooks'));
-  }
-  return allBooks;
-}
-
-function setLocalStorage(book) {
-  const allBooks = getLocalStorage();
-  allBooks.push(book);
-  localStorage.setItem('allBooks', JSON.stringify(allBooks));
-}
-
-/* function to remove book from local storage */
-function removeLocalStorage(author) {
-  const allBooks = getLocalStorage();
-
-  allBooks.forEach((book, index) => {
-    if (book.author === author) {
-      allBooks.splice(index, 1);
+class Data {
+  static getLocalStorage() {
+    let allBooks;
+    if (localStorage.getItem('allBooks') === null) {
+      allBooks = [];
+    } else {
+      allBooks = JSON.parse(localStorage.getItem('allBooks'));
     }
-  });
+    return allBooks;
+  }
 
-  localStorage.setItem('allBooks', JSON.stringify(allBooks));
+  static setLocalStorage(book) {
+    const allBooks = Data.getLocalStorage();
+    allBooks.push(book);
+    localStorage.setItem('allBooks', JSON.stringify(allBooks));
+  }
+
+  static removeLocalStorage(author) {
+    const allBooks = Data.getLocalStorage();
+
+    allBooks.forEach((book, index) => {
+      if (book.author === author) {
+        allBooks.splice(index, 1);
+      }
+    });
+
+    localStorage.setItem('allBooks', JSON.stringify(allBooks));
+  }
 }
 
-const booksArray = getLocalStorage();
+class Actions {
+  static display() {
+    const books = Data.getLocalStorage();
 
-const books = booksArray;
+    books.forEach((book) => Actions.addBook(book));
+  }
 
-books.forEach((book) => addBook(book));
+  static addBook(book) {
+    if (book.title !== undefined) {
+      const list = document.querySelector('#book-list');
+      const newRow = document.createElement('tr');
 
-document.addEventListener('DOMContentLoaded', addBook);
+      newRow.innerHTML = `
+      <li>"${book.title}"</li>
+      <li>${'by'}</li>
+      <li>${book.author}</li>
+      <button class="remove">Remove</button>
+      `;
+
+      list.appendChild(newRow);
+    }
+  }
+
+  static removeBook(element) {
+    if (element.classList.contains('remove')) {
+      element.parentElement.remove();
+    }
+  }
+
+  static clearValues() {
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', Actions.display);
 
 document.querySelector('#add').addEventListener('click', (e) => {
   e.preventDefault();
@@ -77,12 +79,12 @@ document.querySelector('#add').addEventListener('click', (e) => {
   const title = document.querySelector('#title').value;
   const author = document.querySelector('#author').value;
   const book = new Book(title, author);
-  addBook(book);
-  clearValues();
-  setLocalStorage(book);
+  Actions.addBook(book);
+  Data.setLocalStorage(book);
+  Actions.clearValues();
 });
 
 document.querySelector('#book-list').addEventListener('click', (e) => {
-  removeBook(e.target);
-  removeLocalStorage(e.target.previousElementSibling.textContent);
+  Actions.removeBook(e.target);
+  Data.removeLocalStorage(e.target.previousElementSibling.textContent);
 });
